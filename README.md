@@ -1,191 +1,99 @@
----
+# ChatterAI
 
-# ChatterAI: Intelligent Conversation Chatbot
-
-ChatterAI is an advanced chatbot that leverages **Bag of Words** and **Weighted Embedding (LSTM)** techniques to predict user intents and generate responses. If the model cannot provide a suitable response, it seamlessly integrates with **ChatGPT** to ensure the user always gets a meaningful reply. This project is ideal for developers looking to build and deploy intelligent chatbots for various applications.
-
----
+An intent-classification chatbot for **Persian** text. It uses a Bag-of-Words neural network or an Embedding + LSTM model, and when neither model finds a matching intent it can fall back to ChatGPT. A command-line menu lets you build the intent dataset, train a model and chat with it.
 
 ## Features
 
-- **Dual Prediction Models**:
-  - **Bag of Words**: A lightweight and fast method for intent classification.
-  - **Weighted Embedding with LSTM**: A deep learning-based approach for more accurate intent prediction.
-- **ChatGPT Integration**: Fallback to ChatGPT for generating responses when the model cannot provide a suitable answer.
-- **Customizable Training**: Train the chatbot with your own dataset using JSON files.
-- **Modular Code**: Easy-to-understand and extendable codebase for developers.
+- **Two intent classifiers, built with TensorFlow/Keras:**
+  - **Bag of Words:** a dense network (128 → 64 → softmax, with dropout) trained with SGD on binary bag-of-words vectors.
+  - **Embedding + LSTM:** a Keras `Tokenizer`, padded sequences (length 20), a 30-dimension `Embedding`, an `LSTM(256)` layer and a softmax output, trained with Adam.
+- **Persian text preprocessing** with [hazm](https://github.com/roshan-research/hazm): standard and informal normalization, sentence and word tokenization, and lemmatization.
+- **Confidence threshold:** an intent is used only if its predicted probability is above 0.20. The bot then replies with a random response from that intent.
+- **ChatGPT fallback (optional):** if no intent passes the threshold, the message is sent to `gpt-3.5-turbo` through the legacy `openai` 0.28 SDK. If that call fails, the bot replies with a fixed Persian message saying no suitable answer was found.
+- **Dataset editor** (CLI) for intent JSON files: create a file, add tags, add patterns and responses, and view them.
+- **CSV labeling helper:** go through a `user`/`operator` conversation CSV one row at a time and assign each user message to a tag. Your position is saved, so you can resume later.
+- **Included data and models:** sample intent files (`bag`, `weight`, `food`) with their trained `.h5` models and pickled vocabularies and tokenizers.
 
----
+## Requirements
 
-## Table of Contents
+- Python 3.8–3.10 (TensorFlow 2.10 and pandas 2.0.3 require these versions)
+- The dependencies in `requirements.txt`: `hazm`, `tensorflow`, `pandas`, `openai==0.28.0`, `numpy`, `scipy`
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Project Structure](#project-structure)
-4. [Training the Model](#training-the-model)
-5. [Running the Chatbot](#running-the-chatbot)
-6. [Example JSON File](#example-json-file)
-7. [Contributing](#contributing)
+## Getting Started
 
----
+```bash
+git clone https://github.com/sedwna/ChatterAI.git
+cd ChatterAI
+pip install -r requirements.txt
+cd src          # the app reads and writes data using ../ paths, so start it from src/
+python main.py
+```
 
-## Installation
+### ChatGPT fallback (optional)
 
-### Prerequisites
-
-Before running the project, ensure you have the following installed:
-
-- Python 3.7 or higher
-- Required Python libraries (listed in `requirements.txt`)
-
-### Steps
-
-1. **Clone the Repository**:
-
-   ```bash
-   git clone https://github.com/sedwna/ChatterAI.git
-   ```
-
-2. **Install Dependencies**:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Set Up OpenAI API (for ChatGPT)**:
-   - If you want to use ChatGPT as a fallback, sign up for an API key at [OpenAI](https://openai.com/api/).
-   - Add your API key to the `chatgpt.py` file.
-
----
+`src/chatgpt.py` contains a placeholder key (`openai.api_key = "####"`). To turn the fallback on, put your own OpenAI API key there in your local copy, and don't commit it. Without a key, the bot still answers every message that matches an intent.
 
 ## Usage
 
-### Training the Model
+When the app starts, it asks for the name of an intent file in `json_file/`, without the `.json` extension (for example `bag`). If the file doesn't exist, it offers to create it. Then choose an option from the menu:
 
-1. Prepare your JSON file with intents and responses (see [Example JSON File](#example-json-file)).
-2. Train the model using one of the following methods:
+| Option | Action |
+| --- | --- |
+| `1` | List the tags |
+| `2` | Add a tag |
+| `3` | Add responses to a tag |
+| `4` | Add patterns to a tag |
+| `5` | Show a tag's patterns |
+| `6` | Show a tag's responses |
+| `8` | Label messages from `csv_file/<name>.csv` into tags |
+| `9` | Train a model (`1` = Bag of Words, `2` = LSTM) |
+| `10` | Chat with the bot (`1` = Bag of Words, `2` = LSTM) |
+| `-1` | Exit |
 
-   - **Bag of Words**:
-     ```python
-     trainer_bag_of_word("intents")
-     ```
-   - **Weighted Embedding (LSTM)**:
-     ```python
-     trainer_weight("intents")
-     ```
+When you train on `<name>.json`, the app saves:
 
-   The trained model and processed data will be saved in the `chat_bot_model` and `pkl_file` folders, respectively.
+- `chat_bot_model/<name>_model.h5`
+- `pkl_file/<name>_words.pkl` and `pkl_file/<name>_classes.pkl`
+- `pkl_file/<name>_tkn.pkl` (LSTM model only)
 
-### Running the Chatbot
+To chat, pick the same model type you trained on that file. The included files are set up like this: `bag` uses Bag of Words, while `weight` and `food` use LSTM.
 
-1. Start the chatbot using one of the following methods:
-
-   - **Bag of Words**:
-     ```python
-     bag_chatbot_model("intents")
-     ```
-   - **Weighted Embedding (LSTM)**:
-     ```python
-     weight_chatbot_model("intents")
-     ```
-
-2. Interact with the chatbot in the terminal. Type your messages, and the chatbot will respond accordingly.
-
----
-
-## Project Structure
-
-```
-ChatterAI/
-├── json_file/               # Contains JSON files for intents and responses
-├── pkl_file/                # Stores processed data (words, classes, tokenizers)
-├── chat_bot_model/          # Contains trained TensorFlow models
-├── nlp.py                   # NLP functions (tokenization, cleaning, etc.)
-├── chatgpt.py               # Integration with ChatGPT
-├── main.py                  # Main script to run the chatbot
-├── requirements.txt         # List of dependencies
-├── README.md                # Project documentation
-└── LICENSE                  # License file
-```
-
----
-
-## Training the Model
-
-### Bag of Words
-
-The `trainer_bag_of_word` function trains a simple neural network using the Bag of Words approach. It creates a binary matrix of words and their corresponding intents.
-
-### Weighted Embedding (LSTM)
-
-The `trainer_weight` function trains an LSTM-based model using word embeddings. This approach is more advanced and suitable for complex datasets.
-
----
-
-## Running the Chatbot
-
-Once the model is trained, you can run the chatbot using the `bag_chatbot_model` or `weight_chatbot_model` functions. The chatbot will:
-1. Predict the user's intent.
-2. Generate a response based on the trained model.
-3. Fall back to ChatGPT if no suitable response is found.
-
----
-
-## Example JSON File
-
-Here’s an example JSON file for defining intents and responses:
+### Intent file format
 
 ```json
 {
   "intents": [
     {
       "tag": "greeting",
-      "patterns": ["hello", "hi", "hey"],
-      "responses": ["Hello!", "Hi there!", "Hey! How can I help you?"]
-    },
-    {
-      "tag": "goodbye",
-      "patterns": ["bye", "goodbye", "see you later"],
-      "responses": ["Goodbye!", "See you later!", "Have a great day!"]
-    },
-    {
-      "tag": "thanks",
-      "patterns": ["thank you", "thanks", "appreciate it"],
-      "responses": ["You're welcome!", "No problem!", "Happy to help!"]
+      "patterns": ["سلام", "سلام وقت شما بخیر"],
+      "responses": ["سلام", "سلام چطور میتونم کمکتون کنم؟"]
     }
   ]
 }
 ```
 
----
+## Project Structure
 
-## Contributing
+```
+ChatterAI/
+├── src/
+│   ├── main.py        # CLI menu entry point
+│   ├── app.py         # Intent JSON editor and CSV labeling helper
+│   ├── nlp.py         # hazm-based normalization, tokenization and lemmatization
+│   ├── training.py    # Bag-of-Words and Embedding+LSTM trainers
+│   ├── chatbot.py     # Intent prediction, response selection and chat loop
+│   └── chatgpt.py     # Optional ChatGPT fallback (openai 0.28)
+├── json_file/         # Intent datasets: bag.json, weight.json, food.json
+├── chat_bot_model/    # Trained Keras models (.h5)
+├── pkl_file/          # Pickled vocabularies, classes and tokenizers
+├── csv_file/counter/  # Resume positions for the CSV labeling helper
+└── requirements.txt
+```
 
-We welcome contributions to ChatterAI! If you'd like to contribute, please follow these steps:
+## Tech Stack
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeatureName`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push your changes to your fork (`git push origin feature/YourFeatureName`).
-5. Open a Pull Request.
-
----
-
-## Acknowledgments
-
-- **OpenAI** for providing the ChatGPT API.
-- **TensorFlow** and **Keras** for enabling deep learning model training.
-- **NLTK** for natural language processing utilities.
-
----
-
-## Contact
-
-For questions or feedback, feel free to reach out:
-
-- **Email**: [sajaddehqan2002@gmail.com]
-- **GitHub**: [[My GitHub Profile](https://github.com/sedwna)]
-- **Project Repository**: [[ChatterAI GitHub Repo](https://github.com/sedwna/ChatterAI)]
-
----
-
+- Python
+- TensorFlow / Keras (Dense and LSTM models)
+- hazm (Persian NLP)
+- NumPy, pandas
+- OpenAI Python SDK 0.28 (optional fallback)

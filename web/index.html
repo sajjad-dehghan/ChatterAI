@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fa" dir="ltr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="رابط فارسی ChatterAI؛ جست‌وجوی پاسخ در دیتاست تألیفی با ۶۷ موضوع، داخل مرورگر"><title>ChatterAI — گفت‌وگوی کوچک، ایدهٔ بزرگ</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script></head>
+<body>
+<div class="shell">
+ <header><a class="brand" href="./" dir="ltr"><span class="brand-icon" aria-hidden="true">✳</span> Chatter<span>AI</span><small>LANGUAGE LAB / 01</small></a><a class="back" href="https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/fa#all-projects">بازگشت به ویترین ↗</a></header>
+ <main>
+  <section class="intro" aria-labelledby="title">
+   <p class="eyebrow" dir="ltr"><span></span> SMALL MODEL. REAL CONVERSATION.</p>
+   <h1 id="title" dir="ltr">A little chat.<br><em>A lot of curiosity.</em></h1>
+   <h2>از یک «سلام» شروع کنیم.</h2>
+   <p class="description">یک آزمایش کوچک در فهم زبان فارسی. پیامت را بنویس و ببین یک مدل ساده، چطور از میان کلمه‌ها منظور تو را پیدا می‌کند.</p>
+   <div class="model-card"><div class="card-top"><span>پشت این گفت‌وگو</span><span class="chip" dir="ltr">PERSIAN DATASET / V2</span></div><div class="network" dir="ltr"><span><b id="categories-count">۸</b><small>CATEGORIES</small></span><i>→</i><span><b id="intents-count">۶۷</b><small>TOPICS</small></span><i>→</i><span><b id="patterns-count">۵۵۲</b><small>EXAMPLES</small></span><i>→</i><span><b id="responses-count">۱۳۴</b><small>RESPONSES</small></span></div><p>نمونه‌های تألیفی فارسی، بدون مکالمهٔ شخصی یا دادهٔ استخراج‌شده.<br>جست‌وجوی TF-IDF واژه و سه‌حرفی؛ نه تولید پاسخ با مدل زبانی.</p><a class="dataset-download" href="./dataset.json" download>دریافت دیتاست فارسی ↗</a></div>
+   <div class="privacy"><span aria-hidden="true">↳</span><p>گفت‌وگو فقط در همین صفحه می‌ماند.<br>ChatGPT متصل نیست؛ پیام‌ها به سرور ارسال نمی‌شوند.</p></div>
+  </section>
+  <section class="chat" aria-labelledby="chat-title">
+   <div class="chat-head"><div class="identity"><span class="avatar" aria-hidden="true">✳</span><div><h2 id="chat-title" dir="ltr">ChatterAI</h2><p id="connection" role="status">در حال بارگذاری دیتاست…</p></div></div><button type="button" id="reset" aria-label="گفت‌وگوی تازه" title="گفت‌وگوی تازه">↺</button></div>
+   <div class="dataset-note">نسخهٔ مبتنی بر دیتاست · پاسخ تألیفی و محدود، بدون اطلاعات زنده یا مشاورهٔ تخصصی.</div>
+   <div id="messages" role="log" aria-label="پیام‌های گفت‌وگو" aria-live="polite" aria-relevant="additions"><div class="welcome"><span aria-hidden="true">✳</span><h3>کم حرف، کنجکاو.</h3><p>از محصول و طراحی تا کد و یادگیری ماشین.<br>یک سؤال کوتاه دربارهٔ یک موضوع بپرس.</p></div></div>
+   <div class="suggestions" aria-label="پیام‌های پیشنهادی"><button type="button" data-message="سلام وقت بخیر">سلام 👋</button><button type="button" data-message="MVP چیه">MVP چیه؟</button><button type="button" data-message="تست کاربردپذیری چیه">تست با کاربر</button><button type="button" data-message="دیتاست تمیز یعنی چی">دیتاست تمیز</button></div>
+   <form id="composer"><label class="sr-only" for="message">پیام شما</label><textarea id="message" maxlength="500" rows="1" placeholder="یک پیام کوتاه بنویس…" disabled></textarea><button type="submit" id="send" aria-label="ارسال پیام" disabled>↑</button></form>
+   <div class="composer-meta"><span>Enter ارسال · Shift + Enter خط جدید</span><span id="counter">۰ / ۵۰۰</span></div>
+  </section>
+  <section class="trace" aria-label="نتیجهٔ جست‌وجو"><span class="trace-title">ردّ کلمه‌ها</span><p id="intent">منتظر اولین پیام</p><p id="tokens">کلمه‌های شناخته‌شده اینجا نمایش داده می‌شوند.</p><span id="score">شباهت متنی، احتمال صحت پاسخ نیست.</span></section>
+ </main>
+ <footer><span dir="ltr">AN EXPERIMENT BY SAJJAD DEHGHAN</span><span>کوچک شروع کن. واقعی بساز.</span><a href="https://github.com/sajjad-dehghan/ChatterAI" target="_blank" rel="noreferrer">کد اصلی در گیت‌هاب ↗</a></footer>
+</div>
+</body></html>

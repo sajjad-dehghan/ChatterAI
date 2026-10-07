@@ -1,5 +1,12 @@
 # ChatterAI
 
+## Browser retrieval gallery
+
+![Dataset answer and retrieval trace](docs/showroom/chatter-dataset-answer.jpg)
+![Unrelated input asks for clarification](docs/showroom/chatter-unknown.jpg)
+
+Actual browser captures, 2026-10-07. The browser edition uses the authored 67-topic Persian corpus, not the historical neural model or ChatGPT fallback described below. It does not provide unrestricted knowledge or retain messages beyond page memory. [Sectioned showroom](https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/projects/chatterai).
+
 An intent-classification chatbot for **Persian** text. It uses a Bag-of-Words neural network or an Embedding + LSTM model, and when neither model finds a matching intent it can fall back to ChatGPT. A command-line menu lets you build the intent dataset, train a model and chat with it.
 
 ## Features
@@ -97,3 +104,33 @@ ChatterAI/
 - hazm (Persian NLP)
 - NumPy, pandas
 - OpenAI Python SDK 0.28 (optional fallback)
+
+## Persian browser interface (2026-10-07)
+
+![Actual ChatterAI browser chat](docs/showroom/chatter-ai-browser.jpg)
+
+[Try the browser edition](https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/demos/chatter-ai/).
+
+The `web/` frontend is dependency-free HTML/CSS/JavaScript, with a Persian RTL chat, suggested messages, a fresh-conversation control, a downloadable dataset, and a view of recognized words, intent and textual-similarity score. This is a real running UI capture, not an illustrative mockup.
+
+### Curated Persian dataset v2
+
+The active chat loads `web/dataset.json`: **67 intents, 552 distinct example questions and 134 consistent answers in 8 categories** (conversation, assistant, work, product, design, development, ML and boundaries). The examples are original AI-assisted authored text, not scraped conversations or personal data. New corpus text is CC0-1.0; the original application and font are not relicensed.
+
+`web/retriever.mjs` selects an existing answer with word/character TF-IDF matching. Uncertain, mixed-topic and unrelated questions request clarification. It is not an unrestricted LLM, live-information service or multi-turn reasoning engine. Read the [dataset card](web/DATASET.md) for the exact schema, thresholds and limits. The same expanded corpus is supplied at `json_file/conversation-v2.json` for future Python training; it is not compatible with the old four-class weights without retraining.
+
+Regenerate with `node scripts/build-dataset.mjs` and validate with `node --test web/tests/*.test.mjs` (Node.js 22+). Tests cover all indexed examples, 67 separate development paraphrases, unrelated and ambiguous questions, input normalization, boundaries and original Dense inference. Development cases were used during refinement; passing them is not a blind accuracy benchmark.
+
+The original trained Dense export remains in `web/model.json` with regression code in `web/engine.mjs` (28 → 128 → 64 → 4). Its H5 SHA-256 is `b5f109b893967836b1e3f3fb9263410fced08cd8beebf53cd8babbaf239245d1`. It is archived for reproducibility and **not used by the active v2 chat**. No original Python model was overwritten or retrained.
+
+### Run locally
+
+From this repository root, run `python -m http.server 8080`, then open `http://localhost:8080/web/`. Use HTTP rather than opening the HTML file directly because model loading uses `fetch`. No TensorFlow installation or API key is needed for this browser edition. The original Python run instructions above are unchanged.
+
+### Deliberate limits
+
+- Browser Persian normalization is a lightweight Unicode/token alias layer, not a complete Hazm port.
+- The new corpus removes the historical sample names and conflicting support promises. It provides bounded, authored responses and declines live data or professional advice.
+- Displayed similarity is not a probability of correctness. Match score, distinct-intent margin and content-word coverage must meet documented gates.
+- LSTM and ChatGPT are **not connected** in this browser edition. No external chat API is called. Messages remain only in the current page memory and disappear after reload/reset; no local storage is used.
+- The original Python source, datasets, pickles and H5 models remain unchanged; the new v2 corpus, frontend, documentation and tests are separate additions.

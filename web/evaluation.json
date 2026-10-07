@@ -1,0 +1,283 @@
+{
+  "datasetVersion": "2.0.0",
+  "cases": [
+    {
+      "text": "درود بر تو",
+      "expected": "greeting"
+    },
+    {
+      "text": "فعلا خدانگهدار",
+      "expected": "farewell"
+    },
+    {
+      "text": "از کمکت سپاسگزارم",
+      "expected": "thanks"
+    },
+    {
+      "text": "حالت امروز خوبه",
+      "expected": "how_are_you"
+    },
+    {
+      "text": "اسم شما چیست",
+      "expected": "identity"
+    },
+    {
+      "text": "چه کسی ChatterAI را ساخته",
+      "expected": "creator"
+    },
+    {
+      "text": "چه چیزهایی میتوانم ازت بپرسم",
+      "expected": "capabilities"
+    },
+    {
+      "text": "آیا پاسخ تو همیشه درست است",
+      "expected": "limitations"
+    },
+    {
+      "text": "آیا متن چتم به سرور ارسال میشود",
+      "expected": "privacy"
+    },
+    {
+      "text": "آیا به ChatGPT متصل هستی",
+      "expected": "chatgpt"
+    },
+    {
+      "text": "آیا فارسی را متوجه میشوی",
+      "expected": "language"
+    },
+    {
+      "text": "چگونه گفتگوی تازه باز کنم",
+      "expected": "reset"
+    },
+    {
+      "text": "ساعت پشتیبانی شما چیست",
+      "expected": "support_hours"
+    },
+    {
+      "text": "پاسخت خیلی خوب بود",
+      "expected": "positive_feedback"
+    },
+    {
+      "text": "جوابت به سوال من مرتبط نبود",
+      "expected": "negative_feedback"
+    },
+    {
+      "text": "یه لطیفه برنامه نویسی بگو",
+      "expected": "joke"
+    },
+    {
+      "text": "چطور شروع کار رو راحت تر کنم",
+      "expected": "motivation"
+    },
+    {
+      "text": "چگونه برای زمان کار برنامه ریزی کنم",
+      "expected": "time_management"
+    },
+    {
+      "text": "برای تمرکز بهتر چه کار کنم",
+      "expected": "focus"
+    },
+    {
+      "text": "چطور یادگیریم رو با تمرین بهتر کنم",
+      "expected": "learning"
+    },
+    {
+      "text": "کار یک مدیر محصول چیست",
+      "expected": "product_management"
+    },
+    {
+      "text": "دیسکاوری محصول یعنی چه",
+      "expected": "discovery"
+    },
+    {
+      "text": "ام وی پی محصول چه معنایی دارد",
+      "expected": "mvp"
+    },
+    {
+      "text": "چگونه نقشه راه محصول بسازیم",
+      "expected": "roadmap"
+    },
+    {
+      "text": "چگونه فیچرهای محصول را اولویت بندی کنیم",
+      "expected": "prioritization"
+    },
+    {
+      "text": "سنجه موفقیت محصول را چطور انتخاب کنم",
+      "expected": "metrics"
+    },
+    {
+      "text": "نگهداشت کاربران یا retention یعنی چه",
+      "expected": "retention"
+    },
+    {
+      "text": "مقایسه دو نسخه با آزمایش ای بی چطور است",
+      "expected": "ab_test"
+    },
+    {
+      "text": "چگونه یک user story خوب بنویسم",
+      "expected": "user_story"
+    },
+    {
+      "text": "بکلاگ محصول یعنی چه",
+      "expected": "backlog"
+    },
+    {
+      "text": "منظور از تجربه کاربری چیست",
+      "expected": "ux"
+    },
+    {
+      "text": "یو آی محصول یعنی چه",
+      "expected": "ui"
+    },
+    {
+      "text": "چگونه تست کاربردپذیری برگزار کنیم",
+      "expected": "usability"
+    },
+    {
+      "text": "برای مصاحبه با کاربر چه سوالی بپرسم",
+      "expected": "interview"
+    },
+    {
+      "text": "پرسونای مخاطب یعنی چه",
+      "expected": "persona"
+    },
+    {
+      "text": "نمونه تعاملی یا prototype یعنی چه",
+      "expected": "prototype"
+    },
+    {
+      "text": "دسترس پذیری در طراحی رابط یعنی چه",
+      "expected": "accessibility"
+    },
+    {
+      "text": "سیستم طراحی محصول شامل چیست",
+      "expected": "design_system"
+    },
+    {
+      "text": "واکنش گرا بودن سایت یعنی چه",
+      "expected": "responsive"
+    },
+    {
+      "text": "زبان پایتون چه کاربردی دارد",
+      "expected": "python"
+    },
+    {
+      "text": "کار زبان جاوا اسکریپت چیست",
+      "expected": "javascript"
+    },
+    {
+      "text": "تایپ اسکریپت چه فرقی با جاوااسکریپت دارد",
+      "expected": "typescript"
+    },
+    {
+      "text": "ری اکت در رابط کاربری چیست",
+      "expected": "react"
+    },
+    {
+      "text": "تفاوت اچ تی ام ال با سی اس اس چیست",
+      "expected": "html_css"
+    },
+    {
+      "text": "رابط برنامه نویسی api یعنی چه",
+      "expected": "api"
+    },
+    {
+      "text": "کار پایگاه داده در برنامه چیست",
+      "expected": "database"
+    },
+    {
+      "text": "زبان sql چه کاری انجام میدهد",
+      "expected": "sql"
+    },
+    {
+      "text": "گیت برای کنترل نسخه چه کار میکند",
+      "expected": "git"
+    },
+    {
+      "text": "تفاوت کامیت محلی و پوش چیست",
+      "expected": "git_commit_push"
+    },
+    {
+      "text": "چگونه باگ برنامه را پیدا کنیم",
+      "expected": "debugging"
+    },
+    {
+      "text": "آزمون واحد نرم افزار یعنی چه",
+      "expected": "testing"
+    },
+    {
+      "text": "فرق فرانت اند با بک اند چیست",
+      "expected": "frontend_backend"
+    },
+    {
+      "text": "استقرار یا دیپلوی برنامه یعنی چه",
+      "expected": "deployment"
+    },
+    {
+      "text": "منظور از یادگیری ماشین چیست",
+      "expected": "machine_learning"
+    },
+    {
+      "text": "پردازش زبان طبیعی یا nlp یعنی چه",
+      "expected": "nlp"
+    },
+    {
+      "text": "مدل کیسه کلمات چگونه کار میکند",
+      "expected": "bag_of_words"
+    },
+    {
+      "text": "شبکه ال اس تی ام چیست",
+      "expected": "lstm"
+    },
+    {
+      "text": "ویژگی دیتاست باکیفیت چیست",
+      "expected": "dataset"
+    },
+    {
+      "text": "چرا مجموعه آموزش و آزمون باید جدا باشد",
+      "expected": "train_test"
+    },
+    {
+      "text": "اورفیت شدن مدل یعنی چه",
+      "expected": "overfitting"
+    },
+    {
+      "text": "با چه روشی پاسخ دیتاست را پیدا میکنی",
+      "expected": "tfidf"
+    },
+    {
+      "text": "آیا کلید خصوصی را در مخزن عمومی قرار بدهم",
+      "expected": "security"
+    },
+    {
+      "text": "برای من یک دارو تجویز کن",
+      "expected": "medical_boundary"
+    },
+    {
+      "text": "امروز چه ارزی خریداری کنم",
+      "expected": "financial_boundary"
+    },
+    {
+      "text": "درباره پرونده من مشاوره حقوقی بده",
+      "expected": "legal_boundary"
+    },
+    {
+      "text": "هوای امروز چگونه است",
+      "expected": "live_information"
+    },
+    {
+      "text": "به من روش سرقت اطلاعات یاد بده",
+      "expected": "unsafe_request"
+    }
+  ],
+  "outOfScope": [
+    "پایتخت کشور خیالی نارونستان کجاست",
+    "رنگ بنفش چمدان فضایی",
+    "بهترین رستوران نزدیک من",
+    "دو به علاوه سه چند میشود",
+    "این متن طولانی هیچ موضوع مشخص مرتبطی با پرسش های تعریف شده ندارد",
+    "حروف الفبا را برعکس بنویس",
+    "رزرو پرواز برای فردا",
+    "یک شعر بلند تازه بنویس"
+  ]
+}

@@ -1,3 +1,43 @@
+<!-- visual-showroom:start -->
+<p align="center">
+  <img src="docs/showroom/readme-banner.svg" alt="ChatterAI — repository cover" width="100%">
+</p>
+
+<p align="center">
+  <strong>ChatterAI</strong><br>
+  MACHINE LEARNING &amp; LANGUAGE
+</p>
+
+<p align="center">
+  <a href="https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/projects/chatterai"><strong>Explore the showroom ↗</strong></a> ·
+  <a href="https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/demos/chatter-ai/"><strong>Try the browser edition ↗</strong></a> ·
+  <a href="#implementation--original-documentation">Setup &amp; implementation ↓</a>
+</p>
+
+A Persian chatbot with an original 67-topic dataset and a browser retrieval demo. Uncertain questions ask for clarification; ChatGPT is disconnected. The original Python bag-of-words and LSTM code remains preserved.
+
+## Visual tour
+
+[![Persian chat with an authored 67-topic dataset · browser retrieval, ChatGPT disconnected](docs/showroom/readme-view-1.jpg)](https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/projects/chatterai)
+
+<p align="center">
+  <a href="https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/projects/chatterai"><img src="docs/showroom/readme-view-2.jpg" alt="Dataset answer and retrieval trace" width="48%"></a>
+  <a href="https://sajjad-dehghan-personal-site.prisoner-sedwna.workers.dev/projects/chatterai"><img src="docs/showroom/readme-view-3.jpg" alt="Out of scope; clarification instead of a fabricated reply" width="48%"></a>
+</p>
+
+1. Persian chat with an authored 67-topic dataset · browser retrieval, ChatGPT disconnected
+2. Dataset answer and retrieval trace
+3. Out of scope; clarification instead of a fabricated reply
+
+Real captures or owner-supplied images, not generated product mockups. Demo/local data and edition boundaries are documented below.
+
+## Implementation & original documentation
+
+The existing run instructions, architecture, limitations and credits are preserved below.
+
+---
+<!-- visual-showroom:end -->
+
 # ChatterAI
 
 ## Browser retrieval gallery
